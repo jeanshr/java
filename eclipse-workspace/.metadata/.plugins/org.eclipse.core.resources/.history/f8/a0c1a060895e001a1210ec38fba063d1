@@ -1,0 +1,12 @@
+import java.util.Locale;
+import java.util.Scanner;
+
+public class exercicioResolvido1 {
+
+	public static void main(String[] args) {
+		// leitura de dados de terreno retangular
+			
+		double area, preco;
+	}
+
+}

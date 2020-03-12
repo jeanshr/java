@@ -1,0 +1,13 @@
+import java.io.File;
+import java.util.Scanner;
+
+public class LeArquivos {
+
+	public static void main(String[] args) {
+		
+		File file = new File("//home//jean//Documentos");
+		Scanner scan = null;
+		
+	}
+
+}

@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class idadeEmDias {
+
+	public static void main(String[] args) {
+		
+		int Dias = 0;
+		
+		Scanner sc = new Scanner(System.in);
+		Dias = sc.nextInt();
+		
+		sc.close();
+	}
+
+}

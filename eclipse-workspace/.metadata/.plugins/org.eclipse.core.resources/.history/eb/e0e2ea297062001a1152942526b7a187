@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class idadeEmDias {
+
+	public static void main(String[] args) {
+		
+		int Entrada = 0, Ano, Mes, Dias;
+		
+		Scanner sc = new Scanner(System.in);
+		Entrada = sc.nextInt();
+		
+		Ano = Entrada - 360;
+		Mes = Ano - 30;
+		Dias =+ Mes;
+
+		System.out.println(Ano + "ano(s)");
+		System.out.println(Mes + "mes(es)");
+		System.out.println(Dias + "dia(s)");
+		
+		sc.close();
+	}
+
+}
