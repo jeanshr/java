@@ -12,7 +12,7 @@ public class LeArquivos {
         try {
             scan = new Scanner(file);
             while (scan.hasNextLine()) {
-                System.out.println(scan.nextLine());
+                System.out.println(scan.hasNextLine());
             }
         } catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());

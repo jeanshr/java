@@ -8,11 +8,11 @@ public class LeArquivos {
 
         File file = new File("/home/jean/Documentos/Livros.txt");
         Scanner scan = null;
-
+        String fileLine;
         try {
             scan = new Scanner(file);
             while (scan.hasNextLine()) {
-                System.out.println(scan.nextLine());
+                System.out.println(scan.hasNextLine());
             }
         } catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());

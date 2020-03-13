@@ -6,9 +6,9 @@ public class LeArquivos {
 
 	public static void main(String[] args) {
 
-        File file = new File("/home/jean/Documentos/Livros.txt");
+        File file = new File("/home/jean/Documents/Livro.txt");
         Scanner scan = null;
-
+        String fileLine;
         try {
             scan = new Scanner(file);
             while (scan.hasNextLine()) {
