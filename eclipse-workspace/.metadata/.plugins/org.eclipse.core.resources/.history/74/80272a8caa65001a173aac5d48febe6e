@@ -1,0 +1,11 @@
+
+
+public class LeituraEdicaoFile {
+
+	public static void main(String[] args) {
+		// misturando os exercicios, ler um arquivo e adicionar dados
+
+			String path = "/home/jean/Documentos/Teste.txt";
+	}
+
+}

@@ -1,0 +1,10 @@
+
+public class LeituraArquivosTryWithResources {
+
+	public static void main(String[] args) {
+		// modo limpo
+		
+
+	}
+
+}
