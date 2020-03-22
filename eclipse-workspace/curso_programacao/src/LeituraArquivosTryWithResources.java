@@ -6,7 +6,7 @@ public class LeituraArquivosTryWithResources {
 
 	public static void main(String[] args) {
 		// modo limpo
-		String path = "/home/jean/Documentos/Livros.txt";
+		String path = "/home/jecunha/workspace/github/java/eclipse-workspace/Files/Tesst.txt";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))){
 

@@ -6,7 +6,7 @@ public class LeArquivos {
 
 	public static void main(String[] args) {
 
-        File file = new File("/home/jean/Documentos/Livros.txt");
+        File file = new File("/home/jecunha/workspace/github/java/eclipse-workspace/Files/Test.txt");
         Scanner scan = null;
 
         try {
