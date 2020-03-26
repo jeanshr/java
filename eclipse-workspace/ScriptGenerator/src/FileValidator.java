@@ -50,7 +50,6 @@ public class FileValidator {
         }
     }
     public void criaNovoArquivo() {
-        String y = null;
         try {
             File Script = new File(pathDestino); // append File(pathDestino, true)
             FileWriter fWriter = new FileWriter(Script);
@@ -58,8 +57,6 @@ public class FileValidator {
                 fWriter.write("update test set id_cliente = " + x + " where test = teste , \n");
             }
             fWriter.close();
-
-
         }
         catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());
