@@ -8,20 +8,19 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         FileValidator vld = new FileValidator();
-        //System.out.println("Directory: ");
-        //String pathName = scan.nextLine();
-        //vld.pathOrigem = pathName;
-        String pathName = "/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListIDs.txt";
-        vld.setPathOrigem(pathName);//"/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListIDs.txt"; // ListIDs , Vazio, ListaComplexa
+        System.out.println("Informe o diretório completo do arquivo: ");
+        String pathName = scan.nextLine();
+        vld.pathOrigem = pathName;
+        vld.setPathOrigem(pathName);
         vld.setPathDestino(pathName);
         //se o arquivo for estiver vazio, para a execução, se nao cria o arquivo
-         boolean validation = vld.validationMain;
+        boolean validation = vld.validationMain;
         if(vld.validaArquivo(validation) == false){
-            System.out.println("NOTOK");
+            System.out.println("Arquivo ou diretório inconsistente");
         }
         else {
-            List<String> test = new ArrayList<>();
-            vld.armazenaIDs(test);
+            List<String> recebeParam = new ArrayList<>();
+            vld.armazenaIDs(recebeParam);
             vld.criaNovoArquivo();
         }
     }

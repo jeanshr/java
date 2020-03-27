@@ -8,7 +8,6 @@ public class FileValidator {
     String pathOrigem = null;
     String pathDestino = null; //"/home/jecunha/Downloads/downteste.txt" -- "/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListIDs.txt";
     Boolean validationMain = false;
-    int contaOrigem, contaDestino, idOrigem, idDestino;
 
     public String setPathOrigem(String pathOrigem) {
         return this.pathOrigem = pathOrigem;
@@ -48,11 +47,15 @@ public class FileValidator {
             this.list = ListaIDs;
 
             while (vldLinhas != null) {
-                list.add(vldLinhas);
-                vldLinhas = bReader.readLine();
+                if(vldLinhas.contains(";")){
+                    list.add(vldLinhas);
+                    vldLinhas = bReader.readLine();
+                }
+                else {
+                    System.out.println("arquivo no formato incorreto;");
+                }
             }
         }
-        //fReader.close();
         catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
@@ -60,16 +63,22 @@ public class FileValidator {
     public void criaNovoArquivo() {
         try {
             if(pathDestino != null) {
-                File Script = new File(pathDestino); // append File(pathDestino, true)
+                File Script = new File(pathDestino);
                 String extensionNameForFile = ".SCRIPT";
 
-                File newFileForScript = new File(pathDestino.concat(extensionNameForFile)); //"/home/jecunha/Downloads/downteste.txt"
-                FileWriter fWriter = new FileWriter(newFileForScript);
+                File newFileForScript = new File(pathDestino.concat(extensionNameForFile));
+                FileWriter fWriter = new FileWriter(newFileForScript); //cria novo arquivo para nao alterar o original
 
                 for (String x : list) {
-                    fWriter.write("update test set id_cliente = " + x + " where test = teste , \n");
+                    String[] vet = x.split(";");
+                    //Não necessário um for devido ao arquivo ser sempre de formato padrão, sempre 4 campos
+                    fWriter.write("UPDATE tableTest SET contaVend = " + vet[0] +
+                            ", contaCompr = " + vet[1]+
+                            " WHERE idVend = " + vet[2]+
+                            ", idCompr = " + vet[3]+"\n");
                 }
                 fWriter.close();
+                System.out.println("Arquivo gerado com sucesso em: " + newFileForScript.toString());
             }
             else{
                 System.out.println("Path de destino null ou inexistente");
