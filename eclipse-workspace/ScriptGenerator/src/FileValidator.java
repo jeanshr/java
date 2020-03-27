@@ -5,16 +5,24 @@ import java.util.List;
 
 public class FileValidator {
 
-    String pathOrigem;
-    String pathDestino = "/home/jecunha/Downloads/downteste.txt";
+    String pathOrigem = null;
+    String pathDestino = null; //"/home/jecunha/Downloads/downteste.txt" -- "/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListIDs.txt";
     Boolean validationMain = false;
+    int contaOrigem, contaDestino, idOrigem, idDestino;
+
+    public String setPathOrigem(String pathOrigem) {
+        return this.pathOrigem = pathOrigem;
+    }
+    public String setPathDestino(String pathDestino) {
+        return this.pathDestino = pathDestino;
+    }
 
     List<String> list = new ArrayList<>();
 
     //Verifica se o arquivo existe e possui dados
     public boolean validaArquivo(boolean vld) {
         try {
-            FileReader fReader = new FileReader(pathOrigem);
+            FileReader fReader = new FileReader(setPathOrigem(pathOrigem));
             BufferedReader bReader = new BufferedReader(fReader);
             String vldLinhas = bReader.readLine();
             this.validationMain = vld;
@@ -51,12 +59,21 @@ public class FileValidator {
     }
     public void criaNovoArquivo() {
         try {
-            File Script = new File(pathDestino); // append File(pathDestino, true)
-            FileWriter fWriter = new FileWriter(Script);
-            for(String x : list) {
-                fWriter.write("update test set id_cliente = " + x + " where test = teste , \n");
+            if(pathDestino != null) {
+                File Script = new File(pathDestino); // append File(pathDestino, true)
+                String extensionNameForFile = ".SCRIPT";
+
+                File newFileForScript = new File(pathDestino.concat(extensionNameForFile)); //"/home/jecunha/Downloads/downteste.txt"
+                FileWriter fWriter = new FileWriter(newFileForScript);
+
+                for (String x : list) {
+                    fWriter.write("update test set id_cliente = " + x + " where test = teste , \n");
+                }
+                fWriter.close();
             }
-            fWriter.close();
+            else{
+                System.out.println("Path de destino null ou inexistente");
+            }
         }
         catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());

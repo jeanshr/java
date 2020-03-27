@@ -11,7 +11,9 @@ public class Main {
         //System.out.println("Directory: ");
         //String pathName = scan.nextLine();
         //vld.pathOrigem = pathName;
-        vld.pathOrigem = "/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListaComplexa.txt"; // ListIDs , Vazio, ListaComplexa
+        String pathName = "/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListIDs.txt";
+        vld.setPathOrigem(pathName);//"/home/jecunha/workspace/github/java/eclipse-workspace/Files/ListIDs.txt"; // ListIDs , Vazio, ListaComplexa
+        vld.setPathDestino(pathName);
         //se o arquivo for estiver vazio, para a execução, se nao cria o arquivo
          boolean validation = vld.validationMain;
         if(vld.validaArquivo(validation) == false){
