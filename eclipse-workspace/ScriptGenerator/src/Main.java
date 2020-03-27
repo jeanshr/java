@@ -19,7 +19,7 @@ public class Main {
             System.out.println("Arquivo ou diretório inconsistente");
         }
         else {
-            List<String> recebeParam = new ArrayList<>();
+            List<String> recebeParam = new ArrayList<String>();
             vld.armazenaIDs(recebeParam);
             vld.criaNovoArquivo();
         }

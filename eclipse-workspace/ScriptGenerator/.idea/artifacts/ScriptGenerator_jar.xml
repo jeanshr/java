@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ScriptGenerator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ScriptGenerator_jar</output-path>
+    <root id="archive" name="ScriptGenerator.jar">
+      <element id="module-output" name="ScriptGenerator" />
+    </root>
+  </artifact>
+</component>

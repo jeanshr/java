@@ -16,7 +16,7 @@ public class FileValidator {
         return this.pathDestino = pathDestino;
     }
 
-    List<String> list = new ArrayList<>();
+    List<String> list = new ArrayList<String>();
 
     //Verifica se o arquivo existe e possui dados
     public boolean validaArquivo(boolean vld) {
