@@ -7,10 +7,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         LogAnalyzer analyzer = new LogAnalyzer();
-        String Path = "/home/jecunha/workspace/github/java/eclipse-workspace/Files/";
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Enter a dir with txt files: ");
+        String FilesPath = scan.nextLine();
+        analyzer.Path = FilesPath;
+        analyzer.LogDataFile = FilesPath;
         analyzer.ReadDirectoryFiles();
-        analyzer.ReadAllFilesOption();
-        analyzer.ReadAllFilesOption();
-        analyzer.ReturnSelectedDataInFile();
+        System.out.println("\n");
+        System.out.println("Enter words you'r looking for. Ex: word1;word2: ");
+        String getWordsToSearch = scan.nextLine();
+        analyzer.getWordsToSearchClass = getWordsToSearch;
+        analyzer.SearchForSpecificWords();
+        analyzer.ReadAllFilesOption();;
+        //analyzer.ReadSpecificFilesOption();
     }
 }
