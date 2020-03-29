@@ -1,0 +1,13 @@
+UPDATE tableTest SET contaVend = 1234567, contaCompr = 0987654 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 2342443, contaCompr = 3450987 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 4454556, contaCompr = 8760329 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 2334244, contaCompr = 3243243 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 8766887, contaCompr = 9999999 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 5555555, contaCompr = 6666666 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 4534353, contaCompr = 2313131 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 1111111, contaCompr = 2222222 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 4343434, contaCompr = 1212121 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 0909090, contaCompr = 7676767 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 1212123, contaCompr = 4363413 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 6655544, contaCompr = 4443332 WHERE idVend = 2, idCompr = 5
+UPDATE tableTest SET contaVend = 3233455, contaCompr = 6666532 WHERE idVend = 2, idCompr = 5

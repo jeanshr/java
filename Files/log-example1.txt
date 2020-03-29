@@ -1,0 +1,16 @@
+C:\>javac FilenotFound_Demo.java
+FilenotFound_Demo.java:8: error: unreported vini exception FileNotFoundException; must be caught or declared to be thrown
+      FileReader fr = new FileReader(file);
+                      ^
+1 error
+Exception zika in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
+	at Exceptions.Unchecked_Demo.main(Unchecked_Demo.java:8)
+	Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
+	jean
+Out of the block
+catch (IOException|FileNotFoundException ex) {
+   logger.log(ex);
+   throw ex;
+   Exception thrown jean :java.lang.ArrayIndexOutOfBoundsException: 3
+First rafa element value: 6
+The finally statement is executed

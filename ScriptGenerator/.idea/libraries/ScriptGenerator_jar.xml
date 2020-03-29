@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ScriptGenerator_jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/ScriptGenerator_jar/ScriptGenerator.zip!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/ScriptGenerator_jar/ScriptGenerator.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
