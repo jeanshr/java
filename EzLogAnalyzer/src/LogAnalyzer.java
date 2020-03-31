@@ -5,19 +5,39 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class LogAnalyzer {
-    String Path = null; ///home/jecunha/workspace/github/java/TestFiles/tests/
-    String LogDataFile = null;
-    String getWordsToSearchClass = null;
+    private String Path = null;
+    private String LogDataFile = null;
+    private String WordsToSearchClass = null;
     int countReadbleFiles = 0;
     SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy"); //dd-MM-mm-ss
     Date date = new Date();
+
+    //getters and setters
+    public String getPath(){
+        return this.Path;
+    }
+    public String getLogDataFile(){
+        return this.LogDataFile;
+    }
+    public String getWordsToSearchClass(){
+        return this.WordsToSearchClass;
+    }
+    public void setPath(String mainPath){
+        Path = mainPath;
+    }
+    public void setLogDataFile(String LogFile){
+        LogDataFile = LogFile;
+    }
+    public void setWordsToSearchClass(String InputWords){
+        WordsToSearchClass = InputWords;
+    }
 
     //Get files id from countReadbleFiles var. Record that to use on method ReadSpecificFilesOption()
     List<String> GetFilesID = new ArrayList<String>();
 
     //Validate directory data, list all of it. Count readble files that is ".txt" files and return the count of it.
     public void ReadDirectoryFiles() {
-        File FilesInFolder = new File(Path);
+        File FilesInFolder = new File(getPath());
         File[] listOfFiles = FilesInFolder.listFiles();
 
         for (File file : listOfFiles) {
@@ -101,7 +121,7 @@ public class LogAnalyzer {
 
     //User can choose to search data using specific words, like "java";"logs";data", or
     public void SearchForSpecificWords(){
-        vet = getWordsToSearchClass.split(";");
+        vet = getWordsToSearchClass().split(";");
     }
 
     //Using any words and logs default format, like "[logs-java-lang~]", for example
@@ -112,12 +132,12 @@ public class LogAnalyzer {
 
     //Create a new file with required data
     public void ReturnSelectedDataInFile() throws IOException{
-        if (LogDataFile != null) {
+        if (getLogDataFile() != null) {
             Random random = new Random();
             int randomNumber = random.nextInt(100);
             randomNumber += 1;
             String GettingNewFileForLog = "consolidated-logs-" + dateFormat.format(date) + "-" + randomNumber +".log";
-            File newFileForLog = new File(LogDataFile.concat(GettingNewFileForLog));
+            File newFileForLog = new File(getLogDataFile().concat(GettingNewFileForLog));
             GetReturnedDataForLogFile.addAll(LoadConsolidatedLogFile);
             FileWriter fWriter = new FileWriter(newFileForLog);
             fWriter.write("========== " + date.toString() + " ==========" + "\n\n");

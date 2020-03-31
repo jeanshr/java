@@ -11,15 +11,14 @@ public class Main {
 
         System.out.println("Enter a dir with txt files: ");
         String FilesPath = scan.nextLine();
-        analyzer.Path = FilesPath;
-        analyzer.LogDataFile = FilesPath;
+        analyzer.setPath(FilesPath);
+        analyzer.setLogDataFile(FilesPath);
         analyzer.ReadDirectoryFiles();
         System.out.println("\n");
         System.out.println("Enter words you'r looking for. Ex: word1;word2: ");
         String getWordsToSearch = scan.nextLine();
-        analyzer.getWordsToSearchClass = getWordsToSearch;
+        analyzer.setWordsToSearchClass(getWordsToSearch);
         analyzer.SearchForSpecificWords();
-        analyzer.ReadAllFilesOption();;
-        //analyzer.ReadSpecificFilesOption();
+        analyzer.ReadAllFilesOption();
     }
 }
