@@ -5,48 +5,55 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class LogAnalyzer {
-    private String Path = null;
-    private String LogDataFile = null;
-    private String WordsToSearchClass = null;
-    int countReadbleFiles = 0;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy"); //dd-MM-mm-ss
-    Date date = new Date();
+    private String path = null;
+    private String logDataFile = null;
+    private String wordsToSearchClass = null;
+    private int chooseWhatFilesRead;
+    private int readFileByID;
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy"); //dd-MM-mm-ss
+    private final Date date = new Date();
+
+    //lists and vets
+    //Get files id from countReadbleFiles var. Record that to use on method ReadSpecificFilesOption()
+    List<String> getFilesID = new ArrayList<String>();
+    //List that returns all of directories listed on ReadDirectoryFiles method
+    List<String> getAllFilesInDirectory = new ArrayList<String>();
+    //List to load strings found and use in method ReturnSelectedDataInFile
+    List<String> loadConsolidatedLogFile = new ArrayList<String>();
+    //Load a new list with all data found in ReadAllFilesOption
+    List<String> getReturnedDataForLogFile = new ArrayList<String>(loadConsolidatedLogFile);
+    //Get the specific words typed delimited by ; and split then in SearchForSpecificWords() method
+    String[] vet;
 
     //getters and setters
-    public String getPath(){
-        return this.Path;
-    }
-    public String getLogDataFile(){
-        return this.LogDataFile;
-    }
+    public String getPath(){ return this.path; }
+    public String getLogDataFile(){ return this.logDataFile; }
     public String getWordsToSearchClass(){
-        return this.WordsToSearchClass;
+        return this.wordsToSearchClass;
     }
+    public int getChooseWhatFilesRead(){ return this.chooseWhatFilesRead; }
+    public int getReadFileByID(){ return this.readFileByID; }
     public void setPath(String mainPath){
-        Path = mainPath;
+        path = mainPath;
     }
-    public void setLogDataFile(String LogFile){
-        LogDataFile = LogFile;
-    }
-    public void setWordsToSearchClass(String InputWords){
-        WordsToSearchClass = InputWords;
-    }
-
-    //Get files id from countReadbleFiles var. Record that to use on method ReadSpecificFilesOption()
-    List<String> GetFilesID = new ArrayList<String>();
+    public void setLogDataFile(String LogFile){ logDataFile = LogFile; }
+    public void setWordsToSearchClass(String InputWords){ wordsToSearchClass = InputWords; }
+    public void setChooseWhatFilesRead(int setChooseWhatFilesRead){ chooseWhatFilesRead = setChooseWhatFilesRead; }
+    public void setReadFileByID(int setReadFileByID){ readFileByID = setReadFileByID; }
 
     //Validate directory data, list all of it. Count readble files that is ".txt" files and return the count of it.
-    public void ReadDirectoryFiles() {
-        File FilesInFolder = new File(getPath());
-        File[] listOfFiles = FilesInFolder.listFiles();
+    public void readDirectoryFiles() {
+        int countReadbleFiles = 0;
+        File filesInFolder = new File(getPath());
+        File[] listOfFiles = filesInFolder.listFiles();
 
         for (File file : listOfFiles) {
             //loading my list with all directories of  listOfFiles list, to use in ReadAllFilesOption method;
-            GetAllFilesInDirectory.add(file.toString());
+            getAllFilesInDirectory.add(file.toString());
             if (file.isFile() && file.getName().contains(".txt")) {
                 countReadbleFiles++;
                 String fullNameWithID = countReadbleFiles + file.toString();
-                GetFilesID.add(fullNameWithID.toString());
+                getFilesID.add(fullNameWithID.toString());
                 System.out.println(countReadbleFiles + ". " + file.getName());
             }
         }
@@ -55,21 +62,15 @@ public class LogAnalyzer {
         System.out.println("=========================================");
     }
 
-    //List that returns all of directories listed on ReadDirectoryFiles method
-    List<String>  GetAllFilesInDirectory = new ArrayList<String>();
-    //List to load strings found and use in method ReturnSelectedDataInFile
-    List<String>  LoadConsolidatedLogFile = new ArrayList<String>();
-
-
     //User can choose to search some data in all files returned in the directory or selected files on method ReadSpecificFilesOption()
-    public void ReadAllFilesOption() throws IOException {
+    public void readAllFilesOption() throws IOException {
         String fileName = null;
-        for(String getFileNameFromDirectories : GetAllFilesInDirectory) {
+        for(String getFileNameFromDirectories : getAllFilesInDirectory) {
             if(getFileNameFromDirectories.contains(".txt")) {
                 fileName = getFileNameFromDirectories;
 
                 //calling method that is responsible to get words splitted
-                SearchForSpecificWords();
+                searchForSpecificWords();
                 //String searchStr = null;
                 for (int i = 0; i < vet.length; i++) {
                     String searchStr = vet[i];
@@ -77,73 +78,105 @@ public class LogAnalyzer {
                     while (scan.hasNext()) {
                         String line = scan.nextLine().toLowerCase().toString();
                         if (line.contains(searchStr)) {
-                            LoadConsolidatedLogFile.add(line);
+                            loadConsolidatedLogFile.add(line);
                         }
                     }
                 }
             }
         }
         //calling method that creates a new file consolidating all strings found
-        ReturnSelectedDataInFile();
+        returnSelectedDataInFile();
     }
 
     //User can choose what files wanna open to get data information
-    public void ReadSpecificFilesOption() throws IOException {
-        ReadDirectoryFiles();
-        String getChosenOption = "1"; //file id = 1 selected
-        for(String x : GetFilesID){
-            if(x.startsWith(getChosenOption)) {
+    public void readSpecificFilesOption() throws IOException {
+        for(String x : getFilesID){
+            if(x.startsWith(String.valueOf(getReadFileByID()))){
                 System.out.println("Reading " + x + " file");
                 //calling method that is responsible to get words splitted
-                SearchForSpecificWords();
+                searchForSpecificWords();
                 String searchStr = null;
                 for (int i = 0; i < vet.length; i++) {
                     searchStr = vet[i];
-                    String IgnoreFirstCharacter = "";
-                    IgnoreFirstCharacter = x.replaceFirst(getChosenOption, "");
-                    Scanner scan = new Scanner(new File(IgnoreFirstCharacter));
+                    String ignoreFirstCharacter = "";
+                    ignoreFirstCharacter = x.replaceFirst(String.valueOf(getReadFileByID()), "");
+                    Scanner scan = new Scanner(new File(ignoreFirstCharacter));
                     while (scan.hasNext()) {
-                        String line = scan.nextLine().toLowerCase().toString(); //tem casos que o nome está concatenado com algo, exemplo .JEAN, vai ter q pesquisar usando like %Jean%, ou *Jean*
+                        String line = scan.nextLine().toLowerCase().toString();
                         if (line.contains(searchStr)) {
-                            LoadConsolidatedLogFile.add(line);
+                            loadConsolidatedLogFile.add(line);
                         }
                     }
                 }
-                //calling method that creates a new file consolidating all strings found
-                ReturnSelectedDataInFile();
             }
         }
+        //calling method that creates a new file consolidating all strings found
+        returnSelectedDataInFile();
 
     }
 
-    //Get the specific words typed delimited by ; and split then in SearchForSpecificWords() method
-    String[] vet;
-
     //User can choose to search data using specific words, like "java";"logs";data", or
-    public void SearchForSpecificWords(){
+    public void searchForSpecificWords(){
         vet = getWordsToSearchClass().split(";");
     }
 
     //Using any words and logs default format, like "[logs-java-lang~]", for example
     public void SearchForLogsDefaultFormat(){}
 
-    //Load a new list with all data found in ReadAllFilesOption
-    List<String> GetReturnedDataForLogFile = new ArrayList<String>(LoadConsolidatedLogFile);
-
     //Create a new file with required data
-    public void ReturnSelectedDataInFile() throws IOException{
+    public void returnSelectedDataInFile() throws IOException{
         if (getLogDataFile() != null) {
             Random random = new Random();
             int randomNumber = random.nextInt(100);
             randomNumber += 1;
-            String GettingNewFileForLog = "consolidated-logs-" + dateFormat.format(date) + "-" + randomNumber +".log";
-            File newFileForLog = new File(getLogDataFile().concat(GettingNewFileForLog));
-            GetReturnedDataForLogFile.addAll(LoadConsolidatedLogFile);
+            String gettingNewFileForLog = "consolidated-logs-" + dateFormat.format(date) + "-" + randomNumber +".log";
+            File newFileForLog = new File(getLogDataFile().concat(gettingNewFileForLog));
             FileWriter fWriter = new FileWriter(newFileForLog);
             fWriter.write("========== " + date.toString() + " ==========" + "\n\n");
-            fWriter.write(GetReturnedDataForLogFile.toString());
+            for(String x : loadConsolidatedLogFile) {
+                fWriter.write(x.toString().concat("\n"));
+                fWriter.write("----------------------------------------" + "\n");
+            }
             fWriter.close();
             System.out.println("File has been created in: " + newFileForLog);
+        }
+    }
+    //get files with id included formatted to use on return of method readSpecificFilesOption()
+    public void showFilesWithIdsIncluded(){
+        int count = 0;
+        File filesInFolder = new File(getPath());
+        File[] listOfFiles = filesInFolder.listFiles();
+
+        for (File file : listOfFiles) {
+            if (file.isFile() && file.getName().contains(".txt")) {
+                count++;
+                String fullNameWithID = count + file.toString();
+                System.out.println("=========================================");
+                System.out.println(count + ". " + file.getName());
+                System.out.println("=========================================");
+            }
+        }
+    }
+
+    //clear console after submitte some option
+    public final void clearConsole()
+    {
+        try
+        {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows"))
+            {
+                Runtime.getRuntime().exec("cls");
+            }
+            else
+            {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e)
+        {
+            e.getMessage();
         }
     }
 
