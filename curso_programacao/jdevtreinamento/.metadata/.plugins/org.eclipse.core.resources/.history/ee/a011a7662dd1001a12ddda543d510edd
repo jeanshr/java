@@ -1,0 +1,7 @@
+package cursojava.executavel;
+
+public class Diretor extends Pessoa{
+
+	
+	
+}

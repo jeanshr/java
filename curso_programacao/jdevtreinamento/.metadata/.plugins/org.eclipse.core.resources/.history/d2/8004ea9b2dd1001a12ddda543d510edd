@@ -1,0 +1,7 @@
+package cursojava.executavel;
+
+public class Secretario extends Pessoa{
+
+	
+	
+}

@@ -1,0 +1,11 @@
+package cursojava.classesauxiliares;
+
+import cursojava.interfaces.PermitirAcesso;
+
+/*Receber somente alguem que tenha o contrato da interface de PermitirAcesso, e chamar o autenticar()*/
+public class FuncaoAutenticacao {
+	
+	public boolean autenticarCursoJava(PermitirAcesso acesso) {
+		return acesso.autenticar();
+	}
+}
