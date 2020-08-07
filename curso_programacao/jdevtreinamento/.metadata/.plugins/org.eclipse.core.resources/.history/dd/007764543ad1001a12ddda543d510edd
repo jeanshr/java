@@ -1,8 +1,0 @@
-package cursojava.interfaces;
-
-/*Esta interface será o conmtrato de autenticação*/
-public interface PermitirAcesso {
-	
-	public boolean autenticar(); /*Apenas declaração do método*/
-	public boolean autenticar(String login, String senha);
-}
